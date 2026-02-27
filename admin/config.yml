@@ -1,0 +1,107 @@
+backend:
+  name: github
+  repo: sebjardillier/amstaff-france
+  branch: main
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+locale: 'fr'
+
+collections:
+
+  # ── GUIDES BOUTIQUE ──
+  - name: "guides"
+    label: "📘 Guides Boutique"
+    folder: "_guides"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titre du guide", name: "title", widget: "string" }
+      - { label: "Catégorie", name: "categorie", widget: "select", options: ["Éducation", "Comportement", "Santé", "Alimentation", "Chiot", "Légal France"] }
+      - { label: "Icône (emoji)", name: "icon", widget: "string", default: "📘" }
+      - { label: "Description courte", name: "description", widget: "text" }
+      - { label: "Prix (ex: 9,90€)", name: "prix", widget: "string" }
+      - { label: "Lien Gumroad", name: "gumroad_url", widget: "string", required: false, hint: "Colle ici ton lien Gumroad quand le guide est prêt" }
+      - { label: "Disponible maintenant ?", name: "disponible", widget: "boolean", default: false }
+
+  # ── PAGES PRINCIPALES ──
+  - name: "pages"
+    label: "📄 Pages du site"
+    files:
+
+      - label: "Page Accueil"
+        name: "accueil"
+        file: "_data/accueil.yml"
+        fields:
+          - { label: "Titre principal", name: "hero_title", widget: "string", default: "American Staff France" }
+          - { label: "Sous-titre hero", name: "hero_sub", widget: "text" }
+          - { label: "Texte bouton principal", name: "btn1_text", widget: "string", default: "Lire le guide gratuit" }
+          - { label: "Texte bouton secondaire", name: "btn2_text", widget: "string", default: "Voir les mini-guides" }
+
+      - label: "Page Boutique"
+        name: "boutique"
+        file: "_data/boutique.yml"
+        fields:
+          - { label: "Titre de la boutique", name: "titre", widget: "string", default: "La Boutique AmStaff France" }
+          - { label: "Description", name: "description", widget: "text" }
+          - label: "Message bas de page"
+            name: "message_bas"
+            widget: "text"
+            default: "Les guides arrivent bientôt. Reviens régulièrement !"
+
+      - label: "Page À propos"
+        name: "apropos"
+        file: "_data/apropos.yml"
+        fields:
+          - { label: "Titre", name: "titre", widget: "string" }
+          - { label: "Contenu", name: "contenu", widget: "markdown" }
+
+      - label: "Page Contact"
+        name: "contact"
+        file: "_data/contact.yml"
+        fields:
+          - { label: "Titre", name: "titre", widget: "string", default: "Contact" }
+          - { label: "Email de contact", name: "email", widget: "string" }
+          - { label: "Message d'intro", name: "intro", widget: "text" }
+
+  # ── ARTICLES BLOG ──
+  - name: "blog"
+    label: "✍️ Articles Blog"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Catégorie", name: "categorie", widget: "select", options: ["Éducation", "Comportement", "Santé", "Alimentation", "Chiot", "Légal", "Actualité"] }
+      - { label: "Description (SEO)", name: "description", widget: "text" }
+      - { label: "Image de couverture", name: "image", widget: "image", required: false }
+      - { label: "Contenu", name: "body", widget: "markdown" }
+      - { label: "Publié ?", name: "publie", widget: "boolean", default: true }
+
+  # ── PARAMÈTRES GLOBAUX ──
+  - name: "settings"
+    label: "⚙️ Paramètres du site"
+    files:
+
+      - label: "Informations générales"
+        name: "general"
+        file: "_data/settings.yml"
+        fields:
+          - { label: "Nom du site", name: "site_name", widget: "string", default: "AmStaff France" }
+          - { label: "Description SEO", name: "site_description", widget: "text" }
+          - { label: "Email de contact", name: "email", widget: "string" }
+          - { label: "Lien Facebook", name: "facebook_url", widget: "string", required: false }
+          - { label: "Lien Instagram", name: "instagram_url", widget: "string", required: false }
+          - { label: "Lien YouTube", name: "youtube_url", widget: "string", required: false }
+
+      - label: "Lead Magnet (ebook gratuit)"
+        name: "leadmagnet"
+        file: "_data/leadmagnet.yml"
+        fields:
+          - { label: "Activer le formulaire ebook gratuit ?", name: "actif", widget: "boolean", default: false }
+          - { label: "Titre de l'offre", name: "titre", widget: "string", default: "Reçois notre guide gratuit" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Lien vers l'ebook (PDF)", name: "ebook_url", widget: "string", required: false, hint: "Lien direct vers ton PDF hébergé" }
+          - { label: "Texte du bouton", name: "btn_text", widget: "string", default: "Je veux le guide gratuit" }
